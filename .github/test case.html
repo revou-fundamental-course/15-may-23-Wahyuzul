@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--title/judul pada bagian tab website-->
+    <title>Kalkulator Matematik</title>
+    <!--internal css untuk menambah penampilan, mendesain, mengatur website agar lebih menarik dan rapih--> 
+    <!--seperti mengatur jarak antar element, menentukan warna text/background, dan mendesain form/button-->
+    <style> 
+        header {    
+            background-color: #121212;
+            width:100%;
+            height: 0 px;
+            position:absolute;
+            color: white;
+            top:0;
+            left:0;
+            font-family: bebas neue;
+        }   
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 5px;
+        }
+        .btn-hitung {
+            background-color: #219dfc;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .hasil {
+            margin-top: 20px;
+            padding: 10px;
+            color: #121212;
+            background-color: #f5f5f5;
+        }
+        .menu {
+            margin-bottom: 10px;
+            border-radius: 12px;
+        }
+        .menu a {
+            display: inline-block;
+            margin-right: 10px;
+            padding: 5px 10px;
+            border-radius: 12px;
+            background-color: white;
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .menu a.selected {
+            background-color: #219dfc;
+            color: white;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+<body>
+    <!--bagian header terletak paling atas untuk menuliskan nama website ini-->
+    <header>
+        <h1 style=" font-family : Segoe UI; margin-left: 50px;">Katik <a style="font-size: 15px;">Kalkulator Matematik</a></h1>
+    </header>
+    <!--text untuk welcoming page dan penjelasan mengenai fungsi website-->
+    <h1 style="font-family : Segoe UI; font-size: 55px; line-height: 1.1; margin-left: 500px; margin-top: 110px; color: white;">Welcome to <br> &nbsp&nbsp&nbsp&nbsp&nbspKatik.</h1>
+    <h4 style="text-align: justify; font-family: Segoe UI; margin-left: 315px; color: #696969;">Katik (Kalkulator Matematik) sebuah website untuk menghitung luas dan keliling dari persegi.</h3>
+    <!--isi dari website ini, yaitu sebuah menu dan form untuk melakukan perhitungan-->
+    <div class="container">
+        <div class="menu">
+            <!--pilihan button menu untuk masing masing tampilan dan program yang dijalankan-->
+            <a href="#" onclick="Sisi_Luas()" class="selected">Luas Persegi</a>
+            <a href="#" onclick="Sisi_Keliling()">Keliling Persegi</a>
+        </div>
+        <!--tampilan dari menu luas jika memilih untuk menghitung luas persegi-->
+        <div id="PageLuas" style="color: white;">
+            <h2>Hitung Luas Persegi</h2>
+            <h4>Rumus >> Luas = Sisi x Sisi</h4>
+            <!--form untuk input panjang sisi-->
+            <div class="form-group">
+                <label for="PanjangSisi">Panjang Sisi:</label>
+                <input type="number" id="PanjangSisi" placeholder="Masukkan panjang sisi">
+            </div>
+            <!--button untuk menjalankan program agar mengkalkulasi hasil perhitungan-->
+            <button class="btn-hitung" onclick="Hitung_Luas()">Hitung</button>
+            <!--form output dari hasil kalkulasi perhitungan-->
+            <div class="hasil">
+                <p id="output_luas"></p>
+            </div>
+        </div>
+        <!--tampilan dari menu keliling jika memilih untuk menhitung keliling persegi-->
+        <div id="PageKeliling" style="display: none; color: white;">
+            <h2>Hitung Keliling Persegi</h2>
+            <h4>Rumus >> Keliling = 4 x Sisi</h4>
+            <!--form untuk input panjang sisi-->
+            <div class="form-group">
+                <label for="PanjangSisi2">Panjang Sisi:</label>
+                <input type="number" id="PanjangSisi2" placeholder="Masukkan panjang sisi">
+            </div>
+            <!--button untuk menjalankan program agar mengkalkulasi hasil perhitungan-->
+            <button class="btn-hitung" onclick="Hitung_Keliling()">Hitung</button>
+            <!--form output dari hasil kalkulasi perhitungan-->
+            <div class="hasil">
+                <p id="output_keliling"></p>
+            </div>
+        </div>
+    </div>
+    <!--script berisi logic/perintah dalam program untuk melakukan aksi tertentu. 
+    seperti mengganti tampilan sesuai page menu yang dipilih, dan menjalankan rumus 
+    atau logic yang diberikan untuk melakukan kalkulasi pada perhitungan-->
+    <script>
+        function Sisi_Luas() {
+            document.getElementById("PageLuas").style.display = "block";
+            document.getElementById("PageKeliling").style.display = "none";
+            document.querySelector(".menu a.selected").classList.remove("selected");
+            event.target.classList.add("selected");
+        }
+        function Sisi_Keliling() {
+            document.getElementById("PageLuas").style.display = "none";
+            document.getElementById("PageKeliling").style.display = "block";
+            document.querySelector(".menu a.selected").classList.remove("selected");
+            event.target.classList.add("selected");
+        }
+        function Hitung_Luas() {
+            var PanjangSisi = document.getElementById("PanjangSisi").value;
+            if(PanjangSisi){
+                var luas = PanjangSisi * PanjangSisi;
+                document.getElementById("output_luas").innerHTML = "Luas = Sisi x Sisi" + "<br>Luas = " + PanjangSisi + " x " + PanjangSisi + "<br>Luas = " + luas;
+            }else{
+                document.getElementById("output_luas").innerHTML = "Masukkan panjang sisi!";
+            }
+        }
+        function Hitung_Keliling() {
+            var PanjangSisi = document.getElementById("PanjangSisi2").value;
+            if(PanjangSisi){
+                var keliling = 4 * PanjangSisi;
+                document.getElementById("output_keliling").innerHTML = "Keliling = 4 x Sisi" + "<br>Keliling = 4 x " + PanjangSisi + "<br>Keliling = " + keliling;
+            }else{
+                document.getElementById("output_keliling").innerHTML = "Masukkan panjang sisi!";
+            }
+        }
+    </script>
+</body>
+</html>
